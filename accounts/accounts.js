@@ -4,6 +4,7 @@ const {
   getAccountById,
   deleteAccount,
   createAccount,
+  updateAccount
 } = require('./accountsDbHelper');
 
 const accountsRouter = express.Router();
@@ -42,6 +43,16 @@ accountsRouter.post('/', async (req, res) => {
     res.status(201).json(account);
   } catch (error) {
     res.status(500).json('Error adding account');
+  }
+});
+
+accountsRouter.put('/:id', async (req, res) => {
+  const { params: { id }, body } = req;
+  try {
+    const account = await updateAccount(id, body);
+    res.status(200).json(account);
+  } catch (error) {
+    res.status(500).json('Error updating account');
   }
 });
 
