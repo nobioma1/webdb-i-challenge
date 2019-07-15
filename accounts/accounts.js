@@ -10,8 +10,9 @@ const {
 const accountsRouter = express.Router();
 
 accountsRouter.get('/', async (req, res) => {
+  const { query } = req;
   try {
-    const accounts = await getAccounts();
+    const accounts = await getAccounts(query);
     res.status(200).json(accounts);
   } catch (error) {
     res.status(500).json('Error getting Accounts');

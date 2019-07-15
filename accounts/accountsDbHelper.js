@@ -8,8 +8,13 @@ module.exports = {
   updateAccount,
 };
 
-function getAccounts() {
-  return db('accounts');
+function getAccounts(query) {
+  if (query.hasOwnProperty('sortdir')) {
+    return db('accounts')
+      .orderBy(query.sortby, query.sortdir)
+      .limit(query.limit || 9999999999);
+  }
+  return db('accounts').limit(query.limit || 99999999999);
 }
 
 function getAccountById(id) {
