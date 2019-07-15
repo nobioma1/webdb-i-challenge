@@ -4,6 +4,6 @@ const accounts = require('./accounts/accounts');
 const server = express();
 
 server.use(express.json());
-server.use('/', accounts);
+server.use('/api/accounts', accounts);
 
 module.exports = server;
