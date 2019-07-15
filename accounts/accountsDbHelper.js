@@ -4,6 +4,7 @@ module.exports = {
   getAccounts,
   deleteAccount,
   getAccountById,
+  createAccount,
 };
 
 function getAccounts() {
@@ -20,4 +21,10 @@ function deleteAccount(id) {
   return db('accounts')
     .where({ id })
     .del();
+}
+
+function createAccount(account) {
+  return db('accounts')
+    .insert(account)
+    .then(([id]) => getAccountById(id));
 }

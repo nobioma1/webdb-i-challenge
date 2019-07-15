@@ -3,6 +3,7 @@ const {
   getAccounts,
   getAccountById,
   deleteAccount,
+  createAccount,
 } = require('./accountsDbHelper');
 
 const accountsRouter = express.Router();
@@ -31,6 +32,16 @@ accountsRouter.delete('/:id', async (req, res) => {
     res.status(204).end();
   } catch (error) {
     res.status(500).json('Error deleting Accounts');
+  }
+});
+
+accountsRouter.post('/', async (req, res) => {
+  console.log(req.body);
+  try {
+    const account = await createAccount(req.body);
+    res.status(201).json(account);
+  } catch (error) {
+    res.status(500).json('Error adding account');
   }
 });
 
